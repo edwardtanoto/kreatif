@@ -39,6 +39,9 @@ export default function Home(props) {
     e.preventDefault()
     router.push('/auth')
   }
+  const onChange = (e) => {
+    user.setUserForm(e.target.value)
+  }
   // const [posts, setPosts] = useState(props.posts);
   // const [loading, setLoading] = useState(false);
 
@@ -74,11 +77,12 @@ export default function Home(props) {
         <AuthCheck fallback={
           <>
           <div className='middle'>
-          <form className='username-form' onSubmit={handleClick}>
+            <UsernameForm onsubmit={handleClick} onchange={onChange}/>
+          {/* <form className='username-form' onSubmit={handleClick}>
             <label className='middle'>kreatif.app/</label>
-            <input className='middle' type="text" placeholder='nama' onChange={e => user.setUserForm(e.target.value)}/>
+            <input className='middle' type="text" placeholder='nama' onChange={onChange}/>
             <button>Buat Akun</button>
-            </form>
+            </form> */}
            </div>
            <p className='subtitle'>Gratis & sign up dalam 5 menit.</p>
            </>

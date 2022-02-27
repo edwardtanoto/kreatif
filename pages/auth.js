@@ -11,7 +11,7 @@ const AuthPage = () => {
   return (
     <main>
       {user ? !username ? <>
-      <Test />
+      <Title title={'Onboarding'}/>
       <UsernameForm />
       </> : <SignOutButton /> :  <SignInButton />}
   </main>
@@ -41,12 +41,7 @@ function SignInButton() {
   // Sign out button
   function SignOutButton() {
     return <button onClick={() => auth.signOut()}>Sign Out</button>;
-  }
-
-function Test(){
-    return <p>Halo tewz</p>
-}
-  
+  }  
   
 // Username form
 function UsernameForm() {
@@ -56,6 +51,11 @@ function UsernameForm() {
   
     const { user, username } = useContext(UserContext);
     const {userform} = useContext(UserFormContext);
+
+    useEffect(() => {
+        if(userform) setUserName(userform);
+    }, [userform])
+    
   
     const onSubmit = async (e) => {
       e.preventDefault();
@@ -74,7 +74,8 @@ function UsernameForm() {
   
     const onChange = (e) => {
       // Force form value typed in form to match correct format
-      const val = e.target.value.toLowerCase();
+      
+      let val = e.target.value.toLowerCase();
       const re = /^(?=[a-zA-Z0-9._]{3,15}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
   
       // Only set form value if length is < 3 OR it passes regex
@@ -117,20 +118,20 @@ function UsernameForm() {
         <section>
           <h3>Choose Username</h3>
           <form onSubmit={onSubmit}>
-            <input name="username" placeholder={!userform ? 'myname' : userform} value={userName} onChange={onChange} />
+            <input name="username" placeholder={!userform ? 'myname' : `Ketik apapun sebagai konfirmasi anda memilih ${userform}`} value={userName} onChange={onChange} />
             <UsernameMessage username={userName} isValid={isValid} loading={loading} />
             <button type="submit" className="btn-green" disabled={!isValid}>
               Choose
             </button>
   
-            <h3>Debug State</h3>
+            {/* <h3>Debug State</h3>
             <div>
               Username: {userName}
               <br />
               Loading: {loading.toString()}
               <br />
               Username Valid: {isValid.toString()}
-            </div>
+            </div> */}
           </form>
         </section>
       )
