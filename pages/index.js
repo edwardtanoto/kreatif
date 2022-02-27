@@ -1,59 +1,91 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import { useRouter } from 'next/router';
 
 import Loader from '../components/Loader'
 import PostFeed from '../components/PostFeed';
+import { UsernameForm } from '../components/UsernameForm';
 import { firestore, fromMillis, postToJSON } from '../lib/firebase';
+import {InputGroup,FormControl} from 'react-bootstrap';
+import AuthCheck from '../components/AuthCheck';
+import {Title} from '../components/Title';
+import Navbar from '../components/Navbar';
 
-import { useState } from 'react';
+import { useState, createContext, useContext } from 'react';
+import { UserFormContext } from '../lib/context';
+import { useUserFormData } from '../lib/hooks';
 
-const LIMIT = 10;
+// const LIMIT = 10;
 
-export async function getServerSideProps(context) {
-  const postsQuery = firestore
-    .collectionGroup('posts')
-    .where('published', '==', true)
-    .orderBy('createdAt', 'desc')
-    .limit(LIMIT);
+// export async function getServerSideProps(context) {
+//   const postsQuery = firestore
+//     .collectionGroup('posts')
+//     .where('published', '==', true)
+//     .orderBy('createdAt', 'desc')
+//     .limit(LIMIT);
 
-  const posts = (await postsQuery.get()).docs.map(postToJSON);
-  return {
-    props: { posts }, // will be passed to the page component as props
-  };
-}
+//   const posts = (await postsQuery.get()).docs.map(postToJSON);
+//   return {
+//     props: { posts }, // will be passed to the page component as props
+//   };
+// }
 
 export default function Home(props) {
-  const [posts, setPosts] = useState(props.posts);
-  const [loading, setLoading] = useState(false);
+  const [userform, setUserName] = useState('')
+  const user = useContext(UserFormContext);
 
-  const [postsEnd, setPostsEnd] = useState(false);
+  const router = useRouter()
+  const handleClick = (e) => {
+    e.preventDefault()
+    router.push('/auth')
+  }
+  // const [posts, setPosts] = useState(props.posts);
+  // const [loading, setLoading] = useState(false);
 
-  const getMorePosts = async () => {
-    setLoading(true);
-    const last = posts[posts.length - 1];
+  // const [postsEnd, setPostsEnd] = useState(false);
 
-    const cursor = typeof last.createdAt === 'number' ? fromMillis(last.createdAt) : last.createdAt;
+  // const getMorePosts = async () => {
+  //   setLoading(true);
+  //   const last = posts[posts.length - 1];
 
-    const query = firestore
-      .collectionGroup('posts')
-      .where('published', '==', true)
-      .orderBy('createdAt', 'desc')
-      .startAfter(cursor)
-      .limit(LIMIT);
+  //   const cursor = typeof last.createdAt === 'number' ? fromMillis(last.createdAt) : last.createdAt;
 
-    const newPosts = (await query.get()).docs.map((doc) => doc.data());
+  //   const query = firestore
+  //     .collectionGroup('posts')
+  //     .where('published', '==', true)
+  //     .orderBy('createdAt', 'desc')
+  //     .startAfter(cursor)
+  //     .limit(LIMIT);
 
-    setPosts(posts.concat(newPosts));
-    setLoading(false);
+  //   const newPosts = (await query.get()).docs.map((doc) => doc.data());
 
-    if (newPosts.length < LIMIT) {
-      setPostsEnd(true);
-    }
-  };
+  //   setPosts(posts.concat(newPosts));
+  //   setLoading(false);
+
+  //   if (newPosts.length < LIMIT) {
+  //     setPostsEnd(true);
+  //   }
+  // };
 
   return (
+    <UserFormContext.Provider value={userform}>
       <main>
-        {posts.length == 0 ? 'Empty' : 
+        <h1 className='title'>Kreatif, the future of Indonesian freelance &#10024;</h1>
+        <AuthCheck fallback={
+          <>
+          <div className='middle'>
+          <form className='username-form' onSubmit={handleClick}>
+            <label className='middle'>kreatif.app/</label>
+            <input className='middle' type="text" placeholder='nama' onChange={e => user.setUserForm(e.target.value)}/>
+            <button>Buat Akun</button>
+            </form>
+           </div>
+           <p className='subtitle'>Gratis & sign up dalam 5 menit.</p>
+           </>
+          }>
+            <Link href='/admin'>Create More Use Case</Link>
+        </AuthCheck>
+        {/* {posts.length == 0 ? 'Empty' : 
         <>
             <PostFeed posts={posts} />
 
@@ -63,7 +95,8 @@ export default function Home(props) {
 
             {postsEnd && 'You have reached the end!'}
         </>}
-    
+     */}
       </main>
+      </UserFormContext.Provider>
   );
 }

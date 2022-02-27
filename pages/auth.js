@@ -1,18 +1,19 @@
 import { auth,firestore, googleAuthProvider } from '../lib/firebase';
-import { UserContext } from '../lib/context';
+import { UserContext, UserFormContext } from '../lib/context';
 
 import { useEffect, useState, useCallback, useContext } from 'react';
 import debounce from 'lodash.debounce';
+import Title from '../components/Title';
 
 const AuthPage = () => {
   const { user, username } = useContext(UserContext)
-
+  const {userform} = useContext(UserFormContext);
   return (
     <main>
       {user ? !username ? <>
       <Test />
       <UsernameForm />
-      </> : <SignOutButton /> : <SignInButton />}
+      </> : <SignOutButton /> :  <SignInButton />}
   </main>
   )
 }
@@ -24,9 +25,16 @@ function SignInButton() {
     };
   
     return (
+        <>
+        <Title title={'Join Our Community'}/>
+        <p className='subtitle'>Kreatif adalah project karya anak bangsa untuk meningkatkan SDM kreatif Indonesia.</p>
+    <div className='middle'>
+     
       <button className="btn-google" onClick={signInWithGoogle}>
         <img src={'/google.png'} /> Sign in with Google
       </button>
+      </div>
+      </>
     );
   }
   
@@ -47,6 +55,7 @@ function UsernameForm() {
     const [loading, setLoading] = useState(false);
   
     const { user, username } = useContext(UserContext);
+    const {userform} = useContext(UserFormContext);
   
     const onSubmit = async (e) => {
       e.preventDefault();
@@ -108,7 +117,7 @@ function UsernameForm() {
         <section>
           <h3>Choose Username</h3>
           <form onSubmit={onSubmit}>
-            <input name="username" placeholder="myname" value={userName} onChange={onChange} />
+            <input name="username" placeholder={!userform ? 'myname' : userform} value={userName} onChange={onChange} />
             <UsernameMessage username={userName} isValid={isValid} loading={loading} />
             <button type="submit" className="btn-green" disabled={!isValid}>
               Choose

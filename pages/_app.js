@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 
-import { UserContext } from '../lib/context';
+import { UserContext, UserFormProvider } from '../lib/context';
 import { useUserData } from '../lib/hooks';
 
 import Navbar from '../components/Navbar';
@@ -9,8 +9,10 @@ function MyApp({ Component, pageProps }) {
   const userData = useUserData();
   return <>
      <UserContext.Provider value={userData}>
+       <UserFormProvider>
       <Navbar />
       <Component {...pageProps} />
+      </UserFormProvider>
     </UserContext.Provider>
   </> 
 }
