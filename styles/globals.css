@@ -323,10 +323,12 @@ input[type="file"] {
 .text-danger {
   font-weight: bold;
   color: var(--color-red);
+  /* text-align: center; */
 }
 
 .text-success {
   font-weight: bold;
+  /* text-align: center; */
   color: var(--color-green);
 }
 

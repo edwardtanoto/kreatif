@@ -116,14 +116,17 @@ function UsernameForm() {
     return (
       !username && (
         <section>
-          <h3>Choose Username</h3>
-          <form onSubmit={onSubmit}>
-            <input name="username" placeholder={!userform ? 'myname' : `Ketik apapun sebagai konfirmasi anda memilih ${userform}`} value={userName} onChange={onChange} />
-            <UsernameMessage username={userName} isValid={isValid} loading={loading} />
-            <button type="submit" className="btn-green" disabled={!isValid}>
-              Choose
-            </button>
-  
+        
+        <label>Choose Username</label>
+        <br/>
+        <br/>
+          <div>
+          <form onSubmit={onSubmit} className='username-form'>
+              <label className='middle'>kreatif.app/</label>
+              
+            <input className='middle' name="username" placeholder={!userform ? 'myname' : `${userform}`} value={userName} onChange={onChange} />
+            
+           
             {/* <h3>Debug State</h3>
             <div>
               Username: {userName}
@@ -132,7 +135,21 @@ function UsernameForm() {
               <br />
               Username Valid: {isValid.toString()}
             </div> */}
+            <button type='submit' className='btn-green'>Confirm</button>
           </form>
+          
+         <br/>
+          <input className='middle' name="firstname" value={userName} onChange={onChange} />
+          <input className='middle' name="second name" value={userName} onChange={onChange} />
+          <input className='middle' name="firstname" value={userName} onChange={onChange} />
+          <input className='middle' name="work" value={userName} onChange={onChange} />
+          <input className='middle' name="lokasi" value={userName} onChange={onChange} />
+          <input className='middle' name="budget" value={userName} onChange={onChange} />
+              
+  
+           
+          </div> <UsernameMessage username={userName} isValid={isValid} loading={loading} />
+         
         </section>
       )
     );
