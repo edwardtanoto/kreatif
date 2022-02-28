@@ -11,7 +11,7 @@ const AuthPage = () => {
   return (
     <main>
       {user ? !username ? <>
-      <Title title={`Hello`}/>
+      <Title title={`Hello, welcome aboard.`}/>
       <UsernameForm />
       </> : <SignOutButton /> :  <SignInButton />}
   </main>
@@ -60,7 +60,32 @@ function UsernameForm() {
         if(userform) setUserName(userform);
     }, [userform])
     
-    const onSubmitOnboarding = data => console.log(data);
+    const onSubmitOnboarding = async (e) => {
+        e.preventDefault();
+  
+        // Create refs for both documents
+        const userDoc = firestore.doc(`users/${user.uid}`);
+        const usernameDoc = firestore.doc(`usernames/${userName}`);
+    
+        // Commit both docs together as a batch write.
+        const batch = firestore.batch();
+        batch.set(userDoc, { 
+            username: userName, 
+            photoURL: user.photoURL, 
+            displayName: user.displayName, 
+            firstName: e.target.firstName.value,
+            secondName: e.target.secondName.value, 
+            employmentType: e.target.employmentType.value, 
+            jobTitle: e.target.jobTitle.value,
+            company: e.target.company.value,
+            city: e.target.city.value, 
+            country: e.target.country.value, 
+         
+        });
+        batch.set(usernameDoc, { uid: user.uid });
+    
+        await batch.commit();
+      };
   
     const onSubmit = async (e) => {
       e.preventDefault();
@@ -122,10 +147,10 @@ function UsernameForm() {
       !username && (
         <section>
           <div>
-          <form onSubmit={handleSubmit(onSubmitOnboarding)}>
+          <form onSubmit={onSubmitOnboarding}>
             <div className='onboarding-form'>
               <label>Username</label>
-            <input name="username" placeholder={!userform ? 'myname' : `${userform}`} value={userName} onChange={onChange} />
+            <input name="username" placeholder={!userform ? 'kreatif.app/nama' : `${userform}`} value={userName} onChange={onChange} />
             </div>
             <UsernameMessage username={userName} isValid={isValid} loading={loading} />
           
@@ -156,7 +181,7 @@ function UsernameForm() {
       </div>
       <div className='onboarding-form'>
           <label>Job Title</label>
-      <select {...register("Job Title", { required: true })}>
+      <select {...register("jobTitle", { required: true })}>
         <option value="UI/UX Design">UI/UX Design</option>
         <option value="Graphic Design">Graphic Design</option>
         <option value="Software Developer">Software Developer</option>
@@ -181,14 +206,7 @@ function UsernameForm() {
           <input type="text" placeholder="Indonesia" {...register("country", { minLength: { value: 2, message: "Masukkan Negara yang tepat." } , required: {value:true, message:"Mohon diisi Negara asal." }})} />
           {errors.country && <p className="text-danger">{errors.country.message}</p>}
       </div>
-     
-     
-     
-      
-     
-     
-
-      <input type="submit" />
+      <button type='submit' className='btn-green'>Confirm</button>
     </form>
   
            
@@ -203,7 +221,7 @@ function UsernameForm() {
     if (loading) {
       return <p>Checking...</p>;
     } else if (isValid) {
-      return <p className="text-success">{username} is available!</p>;
+      return <p className="text-success">kreatif.app/{username} tersedia untuk anda.</p>;
     } else if (username.length < 3 && !isValid) {
         return <p className="text-danger">Jumlah username harus diatas angka tiga.</p>;
     } else if (username && !isValid) {
