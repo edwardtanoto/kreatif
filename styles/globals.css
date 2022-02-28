@@ -286,6 +286,31 @@ input[type="file"] {
   padding-top: 9px;
   outline: none;
 }
+
+.onboarding-form{
+  margin-top: 20px;
+  padding-bottom: 10px;
+  text-align: left;
+}
+.onboarding-form input{
+  padding-top: 20px;
+  font-size: 1rem;
+  border-bottom:solid white 1px;
+  background-color: #050505;
+  color: white;
+}
+.onboarding-form select {
+  padding: 3px;
+  font-size: 1rem;
+  border: 0;
+  background-color: #050505;
+  color: white;
+}
+.onboarding-form label{
+  padding-bottom: 20px;
+  margin-right: 50px;
+}
+
 .username-form input:focus{
   outline: none;
 }
