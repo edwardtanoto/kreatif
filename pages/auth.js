@@ -1,11 +1,13 @@
 import { auth,firestore, googleAuthProvider } from '../lib/firebase';
 import { UserContext, UserFormContext } from '../lib/context';
 import { useForm } from 'react-hook-form';
-
+import { useRouter } from 'next/router';
 import { useEffect, useState, useCallback, useContext } from 'react';
 import debounce from 'lodash.debounce';
 import Title from '../components/Title';
 import OptionCard from '../components/OptionCard'
+import { useDocumentOnce } from 'react-firebase-hooks/firestore';
+
 
 const AuthPage = () => {
   const { user, username } = useContext(UserContext)
@@ -19,9 +21,19 @@ const AuthPage = () => {
   )
 }
 
-function CreatorComponent (){
+function CreatorComponent (props){
     const userRef = firestore.collection('users').doc(auth?.currentUser?.uid);
-    const { user, username } = useContext(UserContext)
+    const router = useRouter()
+    const [value, loading, error] = useDocumentOnce(
+        firestore.collection('users').doc(auth?.currentUser?.uid),
+        {
+            snapshotListenOptions : {includeMetadataChanges : true}
+        }
+    )
+    if(!loading){
+        const {onboarded} = value?.data()
+    }
+    const { username } = useContext(UserContext)
     
     const onclick = async (e) => {
         e.preventDefault();
@@ -31,6 +43,9 @@ function CreatorComponent (){
         });
       };
 
+    if(onboarded){
+        router.push(`${username}`)
+    }
     return (
         <>
         <Title title={'Apakah kamu'} />
