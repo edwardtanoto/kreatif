@@ -279,6 +279,13 @@ button.btn-navbar {
   max-width: 150px;
 }
 
+.onboarding-img-center {
+  width:50%;
+  display:block;
+  margin:auto;
+  max-width: 200px;
+}
+
 .card-info {
   color: white;
   background: var(--color-blue);

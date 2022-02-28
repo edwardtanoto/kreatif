@@ -78,6 +78,7 @@ function SignInButton() {
         <img src={'/google.png'} /> Sign in with Google
       </button>
       </div>
+      <img src='./globe.png' className='onboarding-img-center'/>
       </>
     );
   }
