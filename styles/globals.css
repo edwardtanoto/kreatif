@@ -283,6 +283,25 @@ button.btn-navbar {
   color: white;
   background: var(--color-blue);
 }
+.left {
+  width: 50%;
+}
+.right {
+  width: 50%;
+  padding: 100px;
+}
+.post-img {
+  cursor: pointer;
+  border-radius: 20px;
+}
+.post-footer {
+  cursor: default;
+}
+.post-card{
+  justify-content: space-evenly;
+  display: flex;
+  border-radius: 8px;
+}
 
 /* Loader */
 
@@ -306,7 +325,11 @@ input[type="file"] {
   display: none;
 }
 
-
+.text-editor code{
+  background-color: #050505;
+  color: white;
+  font-family: 'PlusJakartaSans';
+}
 .username-form {
   position: relative;
   display: flex;
@@ -382,15 +405,24 @@ input[type="file"] {
 .upload-snippet {
   width: 75%;
     margin-left: auto;
-    background: white;
     padding: 5px;
     margin: 5px 0;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    color: white;
 }
 /* Utilities */
 
 .push-left {
   margin-left: auto;
   align-items: left;
+}
+
+.push-right {
+  margin-right: auto;
+  align-items: right;
 }
 
 .text-sm {

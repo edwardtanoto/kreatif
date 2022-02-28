@@ -15,7 +15,7 @@ export default function PostContent({ post }) {
         </Link>{' '}
         on {createdAt.toISOString()}
       </span>
-      <ReactMarkdown>{post?.content}</ReactMarkdown>
+      <ReactMarkdown className='text-editor'>{post?.content}</ReactMarkdown>
     </div>
   );
 }

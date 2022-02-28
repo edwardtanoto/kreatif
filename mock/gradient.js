@@ -1,0 +1,1 @@
+export const gradient = ['./gradients/grass.png','./gradients/peaches.png', './gradients/sky.png', './gradients/sunset.png', './gradients/dream.png', './gradients/bahamas.png']

@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import {gradient}  from '../mock/gradient';
 
 export default function PostFeed({ posts, admin }) {
   return posts ? posts.map((post) => <PostItem post={post} key={post.slug} admin={admin} />) : null;
@@ -6,16 +8,27 @@ export default function PostFeed({ posts, admin }) {
 
 function PostItem({ post, admin = false }) {
   // Naive method to calc word count and read time
+  const [thumbnail, setThumbnail] = useState('')
+  const random = gradient[Math.floor(Math.random() * (gradient.length - 1))] 
   const wordCount = post?.content.trim().split(/\s+/g).length;
+ 
   const minutesToRead = (wordCount / 100 + 1).toFixed(0);
-
+  useEffect(()=> {
+    try {
+        setThumbnail(post?.content.match(/!\[.*?\]\((.*?)\)/)[1])
+      } catch (error) {
+        setThumbnail(random)
+      }
+  },[post])
   return (
-    <div className="card">
-      <Link href={`/${post.username}`}>
-        <a>
-          <strong>By @{post.username}</strong>
-        </a>
-      </Link>
+    <div className="post-card">
+        <div className='left'>
+        <Link href={`/${post.username}/${post.slug}`}>
+            <img src={thumbnail} className='post-img'/>
+        </Link>
+        </div>
+        <div className='right'>
+   
 
       <Link href={`/${post.username}/${post.slug}`}>
         <h2>
@@ -23,13 +36,13 @@ function PostItem({ post, admin = false }) {
         </h2>
       </Link>
 
-      <footer>
+      <footer className='post-footer'>
         <span>
-          {wordCount} words. {minutesToRead} min read
-        </span>
-        <span className="push-left">💗 {post.heartCount || 0} Hearts</span>
+          {wordCount} words. &nbsp; {minutesToRead} min read
+        </span> &nbsp;&nbsp;
+        <span className="push-left">💗 &nbsp; {post.heartCount || 0}</span>
       </footer>
-
+        </div>
       {/* If admin view, show extra controls for user */}
       {admin && (
         <>
