@@ -58,6 +58,13 @@ a {
 
 img {max-width: 100%;}
 
+
+h1.title {
+  text-align: center;
+  font-size:  4rem;
+  padding: 60px;
+}
+
 input { 
   display: inline-block; 
   outline: none;
@@ -93,11 +100,10 @@ code {
   top: 40px;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(17, 25, 40, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
 .navbar ul {
@@ -106,7 +112,7 @@ code {
   padding: 0;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
   height: 100%;
 }
 
@@ -140,8 +146,17 @@ code {
   cursor: pointer;
   margin: 0.5rem 1rem 0.5rem 0;
 }
+.middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 @media only screen and (max-width: 768px) {
+  h1.title {
+    font-size: 2.5rem;
+    padding: 10px;
+  }
   .navbar{
     width: 90%;
   }
@@ -179,7 +194,7 @@ button.btn-green {
 
 button.btn-google {
   background-color: white;
-  color: var(--color-text);
+  color: var(--color-bg);
 }
 
 .btn-google img {
@@ -245,6 +260,48 @@ input[type="file"] {
   display: none;
 }
 
+
+.username-form {
+  position: relative;
+  display: flex;
+  width: 500px;
+  height: 80px;
+  border-radius: 20px;
+}
+
+.username-form label{
+  border-radius: 100px 0 0 100px;
+  background-color: white;
+  align-items: center;
+  padding-left: 30px;
+  color: black;
+  font-size: 1rem;
+  
+}
+
+.username-form input{
+  font-size: 1rem;
+  border-radius: 0px 100px 100px 0px;
+  border: 0;
+  padding-top: 9px;
+  outline: none;
+}
+.username-form input:focus{
+  outline: none;
+}
+.subtitle{
+  color: #404040;
+  font-size: 12px;
+  text-align: center;
+}
+
+.username-form button {
+  position: absolute;
+  right: 0;
+  padding: 20px;
+  width: 150px;
+}
+
 .upload-snippet {
   width: 75%;
     margin-left: auto;
@@ -266,10 +323,12 @@ input[type="file"] {
 .text-danger {
   font-weight: bold;
   color: var(--color-red);
+  /* text-align: center; */
 }
 
 .text-success {
   font-weight: bold;
+  /* text-align: center; */
   color: var(--color-green);
 }
 

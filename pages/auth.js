@@ -1,18 +1,19 @@
 import { auth,firestore, googleAuthProvider } from '../lib/firebase';
-import { UserContext } from '../lib/context';
+import { UserContext, UserFormContext } from '../lib/context';
 
 import { useEffect, useState, useCallback, useContext } from 'react';
 import debounce from 'lodash.debounce';
+import Title from '../components/Title';
 
 const AuthPage = () => {
   const { user, username } = useContext(UserContext)
-
+  const {userform} = useContext(UserFormContext);
   return (
     <main>
       {user ? !username ? <>
-      <Test />
+      <Title title={'Onboarding'}/>
       <UsernameForm />
-      </> : <SignOutButton /> : <SignInButton />}
+      </> : <SignOutButton /> :  <SignInButton />}
   </main>
   )
 }
@@ -24,21 +25,23 @@ function SignInButton() {
     };
   
     return (
+        <>
+        <Title title={'Join Our Community'}/>
+        <p className='subtitle'>Kreatif adalah project karya anak bangsa untuk meningkatkan SDM kreatif Indonesia.</p>
+    <div className='middle'>
+     
       <button className="btn-google" onClick={signInWithGoogle}>
         <img src={'/google.png'} /> Sign in with Google
       </button>
+      </div>
+      </>
     );
   }
   
   // Sign out button
   function SignOutButton() {
     return <button onClick={() => auth.signOut()}>Sign Out</button>;
-  }
-
-function Test(){
-    return <p>Halo tewz</p>
-}
-  
+  }  
   
 // Username form
 function UsernameForm() {
@@ -47,6 +50,12 @@ function UsernameForm() {
     const [loading, setLoading] = useState(false);
   
     const { user, username } = useContext(UserContext);
+    const {userform} = useContext(UserFormContext);
+
+    useEffect(() => {
+        if(userform) setUserName(userform);
+    }, [userform])
+    
   
     const onSubmit = async (e) => {
       e.preventDefault();
@@ -65,7 +74,8 @@ function UsernameForm() {
   
     const onChange = (e) => {
       // Force form value typed in form to match correct format
-      const val = e.target.value.toLowerCase();
+      
+      let val = e.target.value.toLowerCase();
       const re = /^(?=[a-zA-Z0-9._]{3,15}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
   
       // Only set form value if length is < 3 OR it passes regex
@@ -106,23 +116,40 @@ function UsernameForm() {
     return (
       !username && (
         <section>
-          <h3>Choose Username</h3>
-          <form onSubmit={onSubmit}>
-            <input name="username" placeholder="myname" value={userName} onChange={onChange} />
-            <UsernameMessage username={userName} isValid={isValid} loading={loading} />
-            <button type="submit" className="btn-green" disabled={!isValid}>
-              Choose
-            </button>
-  
-            <h3>Debug State</h3>
+        
+        <label>Choose Username</label>
+        <br/>
+        <br/>
+          <div>
+          <form onSubmit={onSubmit} className='username-form'>
+              <label className='middle'>kreatif.app/</label>
+              
+            <input className='middle' name="username" placeholder={!userform ? 'myname' : `${userform}`} value={userName} onChange={onChange} />
+            
+           
+            {/* <h3>Debug State</h3>
             <div>
               Username: {userName}
               <br />
               Loading: {loading.toString()}
               <br />
               Username Valid: {isValid.toString()}
-            </div>
+            </div> */}
+            <button type='submit' className='btn-green'>Confirm</button>
           </form>
+          
+         <br/>
+          <input className='middle' name="firstname" value={userName} onChange={onChange} />
+          <input className='middle' name="second name" value={userName} onChange={onChange} />
+          <input className='middle' name="firstname" value={userName} onChange={onChange} />
+          <input className='middle' name="work" value={userName} onChange={onChange} />
+          <input className='middle' name="lokasi" value={userName} onChange={onChange} />
+          <input className='middle' name="budget" value={userName} onChange={onChange} />
+              
+  
+           
+          </div> <UsernameMessage username={userName} isValid={isValid} loading={loading} />
+         
         </section>
       )
     );
