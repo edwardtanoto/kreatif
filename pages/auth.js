@@ -20,13 +20,26 @@ const AuthPage = () => {
 }
 
 function CreatorComponent (){
-    const { username } = useContext(UserContext)
+    const userRef = firestore.collection('users').doc(auth?.currentUser?.uid);
+    const { user, username } = useContext(UserContext)
+    
+    const onclick = async (e) => {
+        e.preventDefault();
+
+        await userRef.update({
+            onboarded:true,
+        });
+      };
+
     return (
         <>
         <Title title={'Apakah kamu'} />
         <div className='middle'>
+            {}
+        <div onClick={onclick}>
             <OptionCard title={'Ingin membuat profile kreatif.'} href={`/${username}`} image={'/freelance.png'}/>
-        <div>
+        </div>
+        <div onClick={onclick}>
         <OptionCard title={'Ingin memulai project/ mencari talent.'} href={'/showcase'} image={'/rocket.png'}/>
         </div>
         </div>
@@ -89,7 +102,7 @@ function UsernameForm() {
             company: e.target.company.value,
             city: e.target.city.value, 
             country: e.target.country.value, 
-         
+            onboarded : false
         });
         batch.set(usernameDoc, { uid: user.uid });
     

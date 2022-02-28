@@ -6,7 +6,7 @@ import { UserContext } from '../lib/context';
 import toast, {Toaster} from 'react-hot-toast';
 import UserProfileDetail from './UserProfileDetail';
 
-export default function UserProfile({ userdata }) {
+export default function UserProfile({ userdata, currentUser }) {
     const [bio, setBio] = useState('')
     const [textAreaLength, setTextAreaLength] = useState(bio.length)
     const onChange = (e) => {
@@ -34,12 +34,9 @@ export default function UserProfile({ userdata }) {
 
           toast.success('Post updated successfully!')
       };
-    const { user: currentUser, username } = useContext(UserContext);
-    const uid = auth?.currentUser?.uid
-    
     return (
         <>
-              { currentUser?.uid !== uid ? (
+        { currentUser?.photoURL === userdata?.photoURL ? (
             <main>
             <div>
             <h1>{userdata.displayName}</h1>
