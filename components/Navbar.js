@@ -18,19 +18,10 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <ul>
+          
         <li>
           <Link href="/">
             <button className="btn-logo">kreatif</button>
-          </Link>
-        </li>
-        <li>
-          <Link href="/">
-            <button className="btn-navbar">How It Works</button>
-          </Link>
-        </li>
-        <li>
-          <Link href="/">
-            <button className="btn-navbar">Showcase</button>
           </Link>
         </li>
         {/* user is signed-in and has username */}
@@ -49,11 +40,23 @@ export default function Navbar() {
 
         {/* user is not signed OR has not created username */}
         {!username && (
+            <>
+            <li>
+          <Link href="/">
+            <button className="btn-navbar">How It Works</button>
+          </Link>
+        </li>
+        <li>
+          <Link href="/">
+            <button className="btn-navbar">Showcase</button>
+          </Link>
+        </li>
           <li>
             <Link href="/auth">
               <button className="btn-blue">Log in</button>
             </Link>
           </li>
+          </>
         )}
       </ul>
     </nav>

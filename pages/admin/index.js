@@ -46,7 +46,7 @@ function CreateNewPost() {
   const slug = encodeURI(kebabCase(title));
 
   // Validate length
-  const isValid = title.length > 3 && title.length < 100;
+  const isValid = title.length > 3 && title.length < 100 && /^[a-zA-Z0-9 ]*$/.test(title);
 
   // Create a new post in firestore
   const createPost = async (e) => {
@@ -81,8 +81,8 @@ function CreateNewPost() {
       <input
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="My Awesome Article!"
-        className={styles.input}
+        placeholder="How I scaled my project..."
+        className={'admin-page-input'}
       />
       <p>
         <strong>Slug:</strong> {slug}
