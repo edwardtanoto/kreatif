@@ -36,7 +36,6 @@ export async function getServerSideProps({ query }) {
 
 export default function UserProfilePage({ user, posts, username }) {
   const { user: currentUser } = useContext(UserContext);
-  console.log(username, user, currentUser)
   return (
     <main>
       <UserProfile userdata={user} currentUser={currentUser}/>
