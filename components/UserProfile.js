@@ -8,7 +8,7 @@ import UserProfileDetail from './UserProfileDetail';
 
 export default function UserProfile({ userdata, currentUser }) {
     const [bio, setBio] = useState('')
-    const [textAreaLength, setTextAreaLength] = useState(bio.length)
+    const [textAreaLength, setTextAreaLength] = useState(0)
     const onChange = (e) => {
         setTextAreaLength(e.target.value.length)
         setBio(e.target.value)
