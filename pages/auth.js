@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useEffect, useState, useCallback, useContext } from 'react';
 import debounce from 'lodash.debounce';
 import Title from '../components/Title';
+import OptionCard from '../components/OptionCard'
 
 const AuthPage = () => {
   const { user, username } = useContext(UserContext)
@@ -13,9 +14,24 @@ const AuthPage = () => {
       {user ? !username ? <>
       <Title title={`Hello, welcome aboard.`}/>
       <UsernameForm />
-      </> : <SignOutButton /> :  <SignInButton />}
+      </> : <CreatorComponent /> :  <SignInButton />}
   </main>
   )
+}
+
+function CreatorComponent (){
+    const { username } = useContext(UserContext)
+    return (
+        <>
+        <Title title={'Apakah kamu'} />
+        <div className='middle'>
+            <OptionCard title={'Ingin membuat profile kreatif.'} href={`/${username}`} image={'/freelance.png'}/>
+        <div>
+        <OptionCard title={'Ingin memulai project/ mencari talent.'} href={'/showcase'} image={'/rocket.png'}/>
+        </div>
+        </div>
+        </>
+    )
 }
 
 // Sign in with Google button
@@ -38,16 +54,9 @@ function SignInButton() {
     );
   }
   
-  // Sign out button
-  function SignOutButton() {
-    return <button onClick={() => auth.signOut()}>Sign Out</button>;
-  }  
-  
 // Username form
 function UsernameForm() {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    console.log(errors);
-
     const [userName, setUserName] = useState('');
 
     const [isValid, setIsValid] = useState(false);
@@ -86,21 +95,6 @@ function UsernameForm() {
     
         await batch.commit();
       };
-  
-    const onSubmit = async (e) => {
-      e.preventDefault();
-  
-      // Create refs for both documents
-      const userDoc = firestore.doc(`users/${user.uid}`);
-      const usernameDoc = firestore.doc(`usernames/${userName}`);
-  
-      // Commit both docs together as a batch write.
-      const batch = firestore.batch();
-      batch.set(userDoc, { username: userName, photoURL: user.photoURL, displayName: user.displayName });
-      batch.set(usernameDoc, { uid: user.uid });
-  
-      await batch.commit();
-    };
   
     const onChange = (e) => {
       // Force form value typed in form to match correct format
@@ -185,6 +179,7 @@ function UsernameForm() {
         <option value="UI/UX Design">UI/UX Design</option>
         <option value="Graphic Design">Graphic Design</option>
         <option value="Software Developer">Software Developer</option>
+        <option value="Software Engineer">Software Engineer</option>
         <option value="Web Developer">Web Developer</option>
         <option value="App Developer">App Developer</option>
         <option value="Digital Marketing">Digital Marketing</option>

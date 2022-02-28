@@ -11,7 +11,7 @@ import { useForm } from 'react-hook-form';
 
 import ReactMarkdown from 'react-markdown';
 import Link from 'next/link';
-import toast from 'react-hot-toast';
+import toast, {Toaster} from 'react-hot-toast';
 
 export default function AdminPostEdit(props) {
   return (
@@ -80,6 +80,10 @@ function PostForm({ defaultValues, postRef, preview }) {
       )}
 
       <div className={preview ? styles.hidden : styles.controls}>
+      <Toaster
+  position="top-center"
+  reverseOrder={false}
+/>
       <ImageUploader/>
         <textarea {...register("content", {
            maxLength: { value: 20000, message: 'Content is too long' },
@@ -109,7 +113,7 @@ function DeletePostButton({ postRef }) {
     if (doIt) {
       await postRef.delete();
       router.push('/admin');
-      toast('post annihilated ', { icon: '🗑️' });
+      toast('Post berhasil dihapus. ', { icon: '🗑️' });
     }
   };
 

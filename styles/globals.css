@@ -19,6 +19,16 @@
   font-weight: 700;
   font-display: swap;
 }
+.user-profile-detail {
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.user-profile-detail button{
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+}
 :root {
   --color-bg: #050505;
   --color-text: #fff;
@@ -65,7 +75,27 @@ h1.title {
   padding: 60px;
 }
 
+.user-profile-label{
+  margin-top: 60px;
+  font-size: 12px;
+}
+
+textarea.user-profile-bio {
+  height: 100%;
+  margin-top: 10px;
+  color: white;
+  resize: none;
+  font-family: 'PlusJakarta', sans-serif;
+  background-color: #050505;
+  border: 0;
+  font-size: 24px;
+  outline: none;
+  border-bottom: solid white 1px;
+  width: 100%;
+}
+
 input { 
+  font-family: 'PlusJakarta', sans-serif;
   display: inline-block; 
   outline: none;
   border: none;
@@ -127,9 +157,29 @@ code {
   border-radius: 50%;
   
 }
-
+.d-flex{
+  display: flex;
+}
 /* Buttons */
+.option-card {
+  text-align: center;
+  width: 300px;
+  height: 100%;
+  padding: 20px 20px;
+  margin-bottom: 10px;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(17, 25, 40, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  border-radius: 20px;
+  transition: 0.5s;
+  cursor: pointer;
+  margin-left: 20px;
+}
 
+.option-card:hover {
+  background-color: #9b43ff;
+}
 .btn, button {
   background-color: var(--color-button);
   border: none;
@@ -159,10 +209,6 @@ code {
   }
   .navbar{
     width: 90%;
-  }
-  button {
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
   }
 }
 
@@ -285,6 +331,12 @@ input[type="file"] {
   border: 0;
   padding-top: 9px;
   outline: none;
+}
+.admin-page-input {
+  font-size: 72px;
+  padding: 20px;
+  background-color: #050505;
+  color: white;
 }
 
 .onboarding-form{

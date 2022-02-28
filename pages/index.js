@@ -13,7 +13,6 @@ import Navbar from '../components/Navbar';
 
 import { useState, createContext, useContext } from 'react';
 import { UserFormContext } from '../lib/context';
-import { useUserFormData } from '../lib/hooks';
 
 // const LIMIT = 10;
 
@@ -31,7 +30,7 @@ import { useUserFormData } from '../lib/hooks';
 // }
 
 export default function Home(props) {
-  const [userform, setUserName] = useState('')
+  const [userform, setUserForm] = useState('')
   const user = useContext(UserFormContext);
 
   const router = useRouter()
