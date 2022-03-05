@@ -86,7 +86,7 @@ export default function Home(props) {
            <p className='subtitle'>Gratis & sign up dalam 5 menit.</p>
            </>
           }>
-            <Link href='/admin'>Create More Use Case</Link>
+            <Link href='/admin'>Connect with others in your field</Link>
         </AuthCheck>
         {/* {posts.length == 0 ? 'Empty' : 
         <>

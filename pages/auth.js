@@ -50,7 +50,6 @@ function CreatorComponent (props){
         <>
         <Title title={'Apakah kamu'} />
         <div className='middle'>
-            {}
         <div onClick={onclick}>
             <OptionCard title={'Ingin membuat profile kreatif.'} href={`/${username}`} image={'/freelance.png'}/>
         </div>

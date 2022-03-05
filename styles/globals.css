@@ -202,17 +202,6 @@ code {
   align-items: center;
 }
 
-@media only screen and (max-width: 768px) {
-  h1.title {
-    font-size: 2.5rem;
-    padding: 10px;
-  }
-  .navbar{
-    width: 90%;
-  }
-}
-
-
 button:hover {
   filter: brightness(90%);
 }
@@ -352,14 +341,12 @@ input[type="file"] {
   padding-left: 30px;
   color: black;
   font-size: 1rem;
-  
 }
 
 .username-form input{
   font-size: 1rem;
   border-radius: 0px 100px 100px 0px;
   border: 0;
-  padding-top: 9px;
   outline: none;
 }
 .admin-page-input {
@@ -466,3 +453,25 @@ input[type="file"] {
 }
 
 .hidden { display:  none; }
+
+@media only screen and (max-width: 768px) {
+  h1.title {
+    font-size: 2.5rem;
+    padding: 10px;
+  }
+  .navbar{
+    width: 90%;
+  }
+  .post-card{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .post-card .right{
+    width: 100%;
+    padding: 0;
+  }
+  .post-card .left{
+    width: 100%;
+  }
+}
