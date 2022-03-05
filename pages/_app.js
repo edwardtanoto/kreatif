@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
      <UserContext.Provider value={userData}>
        <UserFormProvider>
       <Navbar />
-      <NextNProgress/>
+      <NextNProgress color="#FF54AF" options={{ easing: "ease", speed: 400, showSpinner: false }}/>
 
       <Component {...pageProps} />
       </UserFormProvider>
