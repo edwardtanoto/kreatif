@@ -10,7 +10,7 @@ export const UsernameForm = ({onsubmit , onchange}) => {
    <form className='username-form' onSubmit={onsubmit}>
     <label className='middle'>kreatif.app/</label>
     <input className='middle' type="text" placeholder='nama' onChange={onchange}/>
-    <button>Buat Akun</button>
+    <button style={{width:'90px'}}>Mulai</button>
     </form>
    </>
   )
