@@ -56,7 +56,11 @@ export default function Post(props) {
     const { user: currentUser } = useContext(UserContext);
   
     const post = realtimePost || props.post;
+    console.log(currentUser.username)
     return (
+      <>
+      <Metatags title={currentUser.username}/>
+     
         <main className={styles.container}>
 
         <section>
@@ -84,5 +88,6 @@ export default function Post(props) {
         )}
         </aside>
       </main>
+      </>
     );
 }

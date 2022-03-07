@@ -2,14 +2,14 @@ import Head from 'next/head';
 
 export default function Metatags({
   title = 'Kreatif',
-  description = 'A complete Next.js + Firebase course by Fireship.io',
-  image = 'https://fireship.io/courses/react-next-firebase/img/featured.png',
+  description = 'The modern day freelancing.',
+  image = 'https://kreatif.vercel.app/public/icons/icon-256x256.png',
 }) {
   return (
     <Head>
       <title>{title}</title>
       <meta name="twitter:card" content="summary" />
-      <meta name="twitter:site" content="@fireship_dev" />
+      <meta name="twitter:site" content="" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
