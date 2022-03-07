@@ -1,14 +1,16 @@
 import Link from 'next/link';
 import { useContext } from 'react';
-import { useMediaQuery } from 'react-responsive'
+
 import { useRouter } from 'next/router';
 import { auth } from '../lib/firebase';
 import {UserContext} from '../lib/context'
+import { CgProfile, CgLogIn } from "react-icons/cg";
+import { IoHomeOutline } from "react-icons/io5";
+import { BiGroup } from "react-icons/bi";
 
 // Top navbar
-export default function Navbar() {
+export default function BottomBar() {
   const { user, username } = useContext(UserContext)
-  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
   const router = useRouter();
 
   const signOut =  () => {
@@ -17,18 +19,19 @@ export default function Navbar() {
   }
 
   return (
+      <div>
     <nav className="navbar">
       <ul>
-        <li>
-          <Link href="/">
-            <button className="btn-logo">kreatif</button>
-          </Link>
-        </li>
         {/* user is signed-in and has username */}
         {username && (
           <>
+              <li>
+          <Link href="/">
+            <button className="btn-navbar icon-bottombar"><IoHomeOutline size='1.3rem'/></button>
+          </Link>
+        </li>
            <li className="push-left">
-              <button onClick={signOut}>Sign Out</button>
+              <button className='btn-navbar icon-bottombar' onClick={signOut}>Sign Out</button>
             </li>
             <li>
               <Link href={`/${username}`}>
@@ -43,17 +46,17 @@ export default function Navbar() {
             <>
             <li>
           <Link href="/">
-            <button className="btn-navbar">How It Works</button>
+            <button className="btn-navbar icon-bottombar"><IoHomeOutline size='1.3rem'/></button>
           </Link>
         </li>
         <li>
           <Link href="/">
-            <button className="btn-navbar">Showcase</button>
+            <button className="btn-navbar" ><BiGroup size='1.3rem'/></button>
           </Link>
         </li>
           <li>
             <Link href="/auth">
-              <button className="btn-blue">Log in</button>
+              <button className="btn-navbar" ><CgLogIn  size='1rem'/></button>
             </Link>
           </li>
           </>
@@ -61,5 +64,6 @@ export default function Navbar() {
       </ul>
       
     </nav>
+    </div>
   );
 }

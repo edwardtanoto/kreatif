@@ -453,15 +453,35 @@ input[type="file"] {
 }
 
 .hidden { display:  none; }
-
+.icon-bottombar { 
+  font-size: 12px;
+  transition: 0.3s;
+}
+.icon-bottombar:hover { 
+  color: #D1C7FF;
+}
 @media only screen and (max-width: 768px) {
   h1.title {
     font-size: 2.5rem;
     padding: 10px;
   }
   .navbar{
+    height: 70px;
     width: 90%;
+    color: black;
+    position: fixed;
+    top: 90%;
+    margin: 30px auto;
+    border-radius: 100px;
+    padding: 20px;
+    font-weight: bold;
+    transform: translate(-50%, -50%);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.125);
   }
+
   .post-card{
     display: flex;
     flex-direction: column;
