@@ -20,7 +20,7 @@ export default function BottomBar() {
   }
 
   return (
-      <div>
+      <>
     <nav className="navbar">
       <ul>
         {/* user is signed-in and has username */}
@@ -36,6 +36,9 @@ export default function BottomBar() {
             <button className="btn-navbar icon-bottombar"><IoAddSharp size='1.3rem'/></button>
           </Link>
         </li>
+           <li>
+              <button className='btn-navbar icon-bottombar' onClick={signOut}><VscSignOut size='1.3rem'/></button>
+            </li>
             <li>
               <Link href={`/${username}`}>
                 <img src={user?.photoURL} referrerPolicy={'no-referrer'} alt="Profile"/>
@@ -67,6 +70,6 @@ export default function BottomBar() {
       </ul>
       
     </nav>
-    </div>
+    </>
   );
 }
