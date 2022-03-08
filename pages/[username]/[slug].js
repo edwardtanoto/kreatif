@@ -56,10 +56,9 @@ export default function Post(props) {
     const { user: currentUser } = useContext(UserContext);
   
     const post = realtimePost || props.post;
-    console.log(currentUser.username)
     return (
       <>
-      <Metatags title={currentUser.username}/>
+      <Metatags/>
      
         <main className={styles.container}>
 
