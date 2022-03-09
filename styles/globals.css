@@ -80,7 +80,7 @@ h1.title {
   font-size: 12px;
 }
 
-textarea.user-profile-bio {
+textarea.user-profile-bio, input.user-profile-bio {
   height: 100%;
   margin-top: 10px;
   color: white;
@@ -324,7 +324,7 @@ input[type="file"] {
 .text-editor code{
   background-color: #050505;
   color: white;
-  font-family: 'PlusJakartaSans';
+  font-family: 'PlusJakarta';
 }
 .username-form {
   position: relative;

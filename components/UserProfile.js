@@ -1,8 +1,7 @@
 // UI component for userdata profile
-import Link from 'next/link'
-import {useState, useContext, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import { firestore,auth } from '../lib/firebase';
-import { UserContext } from '../lib/context';
+
 import toast, {Toaster} from 'react-hot-toast';
 import UserProfileDetail from './UserProfileDetail';
 
@@ -27,44 +26,27 @@ export default function UserProfile({ userdata, currentUser }) {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
         await userRef.update({
             bio:bio,
         });
-
           toast.success('Post updated successfully!')
       };
     return (
         <>
         { currentUser?.photoURL === userdata?.photoURL ? (
             <main>
-            <div>
-            <h1>{userdata.displayName}</h1>
-            <form onSubmit={onSubmit}>
-            <label className='user-profile-label'>Tulis Bio</label>
-            <textarea className="user-profile-bio" onKeyDown={handleKeyDown} value={bio} onChange={onChange} placeholder={'Write your bio.'} maxLength={140}/>
-            <p className='subtitle'>{textAreaLength}/140</p>
-            <button type='submit'>Save</button>
-            </form>
-            <Toaster
-      position="top-center"
-      reverseOrder={false}
-    />
-    <h1>Create Case Studies</h1>
-    <Link href="/admin">
-        <button className='btn-green'>New</button>
-    </Link>
-     
-          </div>
-        </main>) : 
-        <>
-        <UserProfileDetail user={userdata}/>
-        </>}
-       
+                <div>
+                <h1>{userdata.displayName}</h1>
+                    <form onSubmit={onSubmit}>
+                        <label className='user-profile-label'>Tulis Bio</label>
+                        <textarea className="user-profile-bio" onKeyDown={handleKeyDown} value={bio} onChange={onChange} placeholder={'Write your bio.'} maxLength={140}/>
+                        <p className='subtitle'>{textAreaLength}/140</p>
+                        <button type='submit'>Save</button>
+                    </form>
+                <Toaster position="top-center" reverseOrder={false}/>
+                </div>
+            </main>) : <UserProfileDetail user={userdata}/>
+        }
         </>
- 
-        
-       
-     
     );
   }
