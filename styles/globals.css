@@ -499,13 +499,15 @@ input[type="file"] {
   .icon-bottombar{
     padding: 0;
   }
-  .username-form label, .username-form input{
-    font-size: 13px;
-  }
   .input {
     padding: 0;
   }
   .username-form input {
     padding-left: 10px;
+  }
+  .username-form label, .username-form input{
+    font-size: 13px;
+    min-height: 60px;
+    padding-left: 14px;
   }
 }
