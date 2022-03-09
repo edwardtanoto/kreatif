@@ -80,7 +80,7 @@ h1.title {
   font-size: 12px;
 }
 
-textarea.user-profile-bio {
+textarea.user-profile-bio, input.user-profile-bio {
   height: 100%;
   margin-top: 10px;
   color: white;
@@ -324,7 +324,7 @@ input[type="file"] {
 .text-editor code{
   background-color: #050505;
   color: white;
-  font-family: 'PlusJakartaSans';
+  font-family: 'PlusJakarta';
 }
 .username-form {
   position: relative;
@@ -470,7 +470,7 @@ input[type="file"] {
     width: 90%;
     color: black;
     position: fixed;
-    top: 90%;
+    top: 88%;
     margin: 30px auto;
     border-radius: 100px;
     padding: 20px;
@@ -482,7 +482,7 @@ input[type="file"] {
     border: 1px solid rgba(255, 255, 255, 0.125);
   }
   .navbar ul {
-    justify-content: space-evenly;
+    justify-content: space-around;
   }
 
   .post-card{
