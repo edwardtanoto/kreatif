@@ -338,7 +338,7 @@ input[type="file"] {
   border-radius: 100px 0 0 100px;
   background-color: white;
   align-items: center;
-  padding-left: 30px;
+  padding-left: 20px;
   color: black;
   font-size: 1rem;
 }
@@ -393,7 +393,6 @@ input[type="file"] {
   position: absolute;
   right: 0;
   padding: 20px;
-  width: 150px;
 }
 
 .upload-snippet {
@@ -499,5 +498,14 @@ input[type="file"] {
   }
   .icon-bottombar{
     padding: 0;
+  }
+  .username-form label, .username-form input{
+    font-size: 13px;
+  }
+  .input {
+    padding: 0;
+  }
+  .username-form input {
+    padding-left: 10px;
   }
 }
